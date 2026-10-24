@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>شكد تحبيني؟</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;800&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{font-family:'Cairo',system-ui,sans-serif;line-height:1.8;overflow-x:hidden;background:#fbfbfd}
+.page{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:40px 20px;
+  background:#fbfbfd;color:#5a0f1a;position:relative;overflow:hidden}
+.stage{display:flex;flex-direction:column;align-items:center;gap:6px;width:min(92vw,440px);z-index:2;animation:up .8s ease both}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+.cat{width:150px}
+.cat svg{width:100%;overflow:visible;display:block}
+#face{animation:swap .35s ease}
+@keyframes swap{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+#msg{font-weight:800;font-size:1.55rem;color:#1a1a1a}
+#pct{font-weight:800;font-size:1.7rem;color:#7a0f1d;margin-bottom:4px}
+.gauge{width:min(82vw,340px);direction:ltr;display:block}
+#segs path{transition:opacity .35s}
+#needle{transition:transform .12s linear}
+#love{direction:ltr;-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;margin:8px 0 4px;outline:0;cursor:pointer;
+  background:linear-gradient(90deg,#e9a7ae var(--p,0%),#e8e3e5 var(--p,0%))}
+#love::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#d4283f;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+#love::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#d4283f;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.btn{display:inline-block;border:0;cursor:pointer;font:inherit;background:#d4283f;color:#fff;padding:12px 28px;border-radius:999px;font-weight:800;box-shadow:0 6px 0 #9b1b2d;transition:.15s}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 #9b1b2d}
+.next{margin-top:10px;animation:pop .6s}
+.corner{position:absolute;top:8px;right:-6px;width:96px}
+.plane{position:absolute;left:-34px;bottom:46px;width:170px;z-index:1;pointer-events:none}
+.rain{position:fixed;top:-30px;font-size:22px;z-index:60;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(40deg);opacity:.2}}
+</style>
+</head>
+<body>
+<main class="page">
+  <svg class="corner" viewBox="0 0 120 80" aria-hidden="true">
+    <path d="M62 14C54 6 46 14 54 22L62 30 70 22C78 14 70 6 62 14Z" fill="#e0525f" transform="translate(0 -4) scale(.8) translate(14 0)"/>
+    <circle cx="46" cy="56" r="20" fill="#fff" stroke="#e98a97" stroke-width="3"/>
+    <circle cx="84" cy="58" r="19" fill="#fff" stroke="#e98a97" stroke-width="3"/>
+    <circle cx="40" cy="58" r="3" fill="#f6b4bb"/><circle cx="90" cy="60" r="3" fill="#f6b4bb"/>
+    <path d="M42 52q3 -3 6 0M80 54q3 -3 6 0" stroke="#e98a97" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </svg>
+
+  <div class="stage">
+    <div class="cat">
+      <svg viewBox="0 0 120 112" aria-hidden="true">
+        <path d="M18 46 L24 10 L48 28 Q60 24 72 28 L96 10 L102 46 Q110 66 98 84 Q60 100 22 84 Q10 66 18 46Z" fill="#fff" stroke="#151515" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M27 21 L40 29 L30 38Z" fill="#f8c9c9"/><path d="M93 21 L80 29 L90 38Z" fill="#f8c9c9"/>
+        <circle cx="31" cy="72" r="6" fill="#f9c0bd" opacity=".75"/><circle cx="89" cy="72" r="6" fill="#f9c0bd" opacity=".75"/>
+        <g id="face"></g>
+        <ellipse cx="42" cy="102" rx="12" ry="8" fill="#fff" stroke="#151515" stroke-width="3"/>
+        <ellipse cx="78" cy="102" rx="12" ry="8" fill="#fff" stroke="#151515" stroke-width="3"/>
+      </svg>
+    </div>
+    <h2 id="msg">شكد تحبيني؟</h2>
+    <div id="pct">0%</div>
+    <svg class="gauge" viewBox="0 0 300 170" aria-hidden="true">
+      <g id="segs"></g>
+      <g id="loveHeart"></g>
+      <text x="150" y="126" text-anchor="middle" font-family="Caveat,cursive" font-size="46" fill="#222" transform="rotate(-8 150 126)">love</text>
+      <g id="needle" transform="translate(150 150) rotate(0)">
+        <line x1="0" y1="0" x2="-80" y2="0" stroke="#3a0b12" stroke-width="3.5" stroke-linecap="round"/>
+        <polygon points="-88,0 -76,-6 -76,6" fill="#3a0b12"/>
+        <circle r="8" fill="#fff" stroke="#3a0b12" stroke-width="3.5"/>
+      </g>
+    </svg>
+    <input id="love" type="range" min="0" max="100" value="0" aria-label="شكد تحبيني">
+    <button class="btn next" id="loveNext" hidden onclick="location.href='gifts.html'">التالي ←</button>
+  </div>
+
+  <svg class="plane" viewBox="0 0 230 210" aria-hidden="true">
+    <path d="M10 50 L150 18 L102 104Z" fill="#f9c8cf" stroke="#e98a97" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M10 50 L102 104 L62 122Z" fill="#f4a9b5" stroke="#e98a97" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="58" cy="62" r="3.5" fill="#222"/><circle cx="78" cy="58" r="3.5" fill="#222"/>
+    <path d="M62 70q6 6 12 -2" stroke="#222" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M70 116 C84 138 104 140 114 132" stroke="#e98a97" stroke-width="3" fill="none" stroke-dasharray="7 7" stroke-linecap="round"/>
+    <path d="M120 200 C84 176 84 138 108 138 C118 138 120 148 120 148 C120 148 122 138 134 138 C158 138 158 176 120 200Z" stroke="#e98a97" stroke-width="3" fill="none" stroke-dasharray="7 7" stroke-linecap="round"/>
+  </svg>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+const K = '#151515', st = `stroke="${K}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"`;
+const heart = (x, y, s, c = '#f4a6ae') => `<path d="M0 5C-9 -3 -5 -9 0 -4C5 -9 9 -3 0 5Z" fill="${c}" transform="translate(${x} ${y}) scale(${s})"/>`;
+
+/* ملامح القطة والجمل حسب النسبة */
+const MOODS = [
+  { max: 0,   msg: 'شكد تحبيني؟',  face: `<circle cx="42" cy="58" r="3.8" fill="${K}"/><circle cx="78" cy="58" r="3.8" fill="${K}"/><path d="M53 68q3.5 5 7 0q3.5 5 7 0" ${st}/>` },
+  { max: 30,  msg: 'بس هالكد؟',    face: `<rect x="37" y="62" width="10" height="30" rx="5" fill="#7dbbea"/><rect x="73" y="62" width="10" height="30" rx="5" fill="#7dbbea"/><path d="M36 60q6 -8 12 0M72 60q6 -8 12 0" ${st}/><ellipse cx="60" cy="74" rx="5" ry="6" fill="${K}"/>` },
+  { max: 55,  msg: 'هاي توجع…',    face: `<path d="M34 58h16M70 58h16" ${st} stroke-width="4"/><path d="M34 50l16 4M86 50l-16 4" ${st}/><path d="M53 72h14" ${st}/>` },
+  { max: 99,  msg:'صدگ تحچيييين ؟؟ تحبيني بس عالنصص',  face: `<circle cx="42" cy="60" r="3.8" fill="${K}"/><circle cx="78" cy="60" r="3.8" fill="${K}"/><path d="M35 52l13 -4M85 52l-13 -4" ${st}/><path d="M53 75q7 -7 14 0" ${st}/>` },
+  { max: 100, msg: ' عفيه عفيه عليچ هيچ اريدچ',   face: `<path d="M36 62q6 -10 12 0M72 62q6 -10 12 0" ${st}/><path d="M50 67q10 17 20 0z" fill="#f28b94" stroke="${K}" stroke-width="3" stroke-linejoin="round"/>${heart(6, 36, 1.5)}${heart(114, 30, 1.8)}${heart(100, 8, 1.1, '#f28b94')}` }
+];
+
+const input = $('#love'), face = $('#face'), msg = $('#msg'), pct = $('#pct'), needle = $('#needle'), nextBtn = $('#loveNext');
+
+/* العدّاد: 5 أجزاء */
+const COL = ['#f8e1df', '#f3b9b5', '#e47f85', '#b23a41', '#5f0d14'], CX = 150, CY = 150, R = 136, r = 72;
+const P = (a, rad) => [CX + rad * Math.cos(a * Math.PI / 180), CY - rad * Math.sin(a * Math.PI / 180)].map(n => n.toFixed(1));
+$('#segs').innerHTML = COL.map((c, i) => {
+  const a0 = 180 - i * 36, a1 = a0 - 36, [ox0, oy0] = P(a0, R), [ox1, oy1] = P(a1, R), [ix1, iy1] = P(a1, r), [ix0, iy0] = P(a0, r);
+  return `<path d="M${ox0} ${oy0}A${R} ${R} 0 0 1 ${ox1} ${oy1}L${ix1} ${iy1}A${r} ${r} 0 0 0 ${ix0} ${iy0}Z" fill="${c}" stroke="#fff" stroke-width="2" opacity=".4"/>`;
+}).join('');
+const [hx, hy] = P(18, 106);
+$('#loveHeart').innerHTML = `<path d="M0 7C-13 -4 -8 -13 0 -7C8 -13 13 -4 0 7Z" transform="translate(${hx} ${hy})" fill="none" stroke="#fff" stroke-width="2.2"/>`;
+const segs = [...document.querySelectorAll('#segs path')];
+
+let mood = -1, done = false;
+function rain() {
+  for (let i = 0; i < 22; i++) {
+    const s = document.createElement('span'); s.className = 'rain'; s.textContent = ['💗', '❤️', '💕'][i % 3];
+    s.style.left = Math.random() * 100 + 'vw'; s.style.animationDuration = 2.2 + Math.random() * 2 + 's'; s.style.animationDelay = Math.random() * .8 + 's';
+    document.body.appendChild(s); setTimeout(() => s.remove(), 5500);
+  }
+}
+function update() {
+  const v = +input.value;
+  input.style.setProperty('--p', v + '%');
+  pct.textContent = v + '%';
+  needle.setAttribute('transform', `translate(150 150) rotate(${v * 1.8})`);
+  segs.forEach((s, i) => s.setAttribute('opacity', v > i * 20 ? 1 : .4));
+  const m = MOODS.findIndex(x => v <= x.max);
+  if (m !== mood) {
+    mood = m; face.innerHTML = MOODS[m].face; msg.textContent = MOODS[m].msg;
+    face.style.animation = 'none'; void face.getBoundingClientRect(); face.style.animation = '';
+  }
+  const full = v === 100; nextBtn.hidden = !full; if (full && !done) rain(); done = full;
+}
+input.addEventListener('input', update); update();
+</script>
+</body>
+</html>
