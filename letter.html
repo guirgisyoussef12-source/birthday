@@ -33,11 +33,10 @@ body{font-family:'Cairo',system-ui,sans-serif;background:var(--paper);color:var(
 </div>
 <div class="nav">
   <button class="btn ghost" id="back">→ رجوع</button>
-  <button class="btn" id="next">التالي ←</button>
 </div>
 <script>
 /* الصفحات اللي يروحلها الزرارين (غيّرهم حسب ملفاتك) */
-const BACK_URL = 'gifts-page.html', NEXT_URL = 'photo.html';
+const BACK_URL = 'gifts.html';
 document.getElementById('back').onclick = () => history.length > 1 ? history.back() : (location.href = BACK_URL);
 document.getElementById('next').onclick = () => location.href = NEXT_URL;
 /* السطور تظهر واحد ورا التاني */
